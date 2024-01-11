@@ -58,8 +58,6 @@ class MainMenuState extends MusicBeatState
 	public static var endingFloat:Float = 2.0;
 	public static var engineFloat:Float = 2.3;
 
-	public var glitch:FlxGlitchEffect;
-
 	var tipkey:FlxText;
 	var tipvideo:FlxText;
 	public static var curSelected:Int = 0;
