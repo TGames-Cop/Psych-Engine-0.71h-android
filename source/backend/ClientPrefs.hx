@@ -8,24 +8,99 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 class SaveVariables {
+	//Originals - GamePlay
 	public var downScroll:Bool = false;
-	public var middleScroll:Bool = false;
+	public var middleScroll:Bool = true;
 	public var opponentStrums:Bool = true;
+	public var noteSkin:String = 'Default';
+	public var splashSkin:String = 'Psych';
+	public var splashAlpha:Float = 0.6;
+	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
+	public var camZooms:Bool = true;
+	public var hideHud:Bool = false;
+	public var ghostTapping:Bool = true;
+	public var timeBarType:String = 'Song Name';
+	public var scoreZoom:Bool = true;
+	public var noReset:Bool = false;
+	public var healthBarAlpha:Float = 1;
+	public var hitsoundVolume:Float = 0;
+	public var pauseMusic:String = 'Tea Time';
+
+	//Originals - Visuals
+	public var antialiasing:Bool = true;
+	public var lowQuality:Bool = false;
+	public var shaders:Bool = true;
+	
+	//Originals - Window
 	public var showFPS:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
-	public var antialiasing:Bool = true;
-	public var noteSkin:String = 'Default';
-	public var splashSkin:String = 'Psych';
-	public var disableNoteRGB:Bool = false;
-	public var disableSplashRGB:Bool = false;
-	public var splashAlpha:Float = 0.6;
-	public var lowQuality:Bool = false;
-	public var shaders:Bool = true;
-	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
 	public var framerate:Int = 60;
-	public var camZooms:Bool = true;
-	public var hideHud:Bool = false;
+
+	//System Versions
+	public var endingCorruprion:String = '2.0';
+	public var endingEngine:String = '2.3';
+	public var pathVersion:String = '1.0';
+	public var username:String = 'User';
+
+	//Initial Settings
+	public var Welcome:Bool = false;
+	public var graphics_internal:String = 'Medium';
+	public var Update_Support:Bool = false;
+	public var SpritesFPS:Int = 24;
+	public var InitialSettings:Bool = false;
+	public var InternetStatus:String = 'Disconnect';
+	public var demo:Bool = true;
+	public var downloadMode:Bool = false;
+
+	//Menu
+	public var musicState:String = 'Hallucination';
+	public var notivisible:Bool = true;
+	public var timetrans:Int = 1;
+	public var language:String = 'Inglish';
+	public var Internet:String = 'disabled';
+	public var recordoptimization:String = 'Disabled';
+	public var music:String = 'TerminalMusic';
+
+	//GamePlay
+	public var concetration:Bool = false;
+	public var overlays:Bool = true;
+	public var dodge:Bool = true;
+	public var alphahud:Bool = true;
+
+	//Window
+	public var fullyscreen:Bool = false;
+	public var width:Int = 1280;
+	public var height:Int = 720;
+	public var fullscreen:Bool = false;
+	public var opacity_mouse:Float = 1;
+	public var windowOpacity:Float = 1;
+
+	//Plugins
+	public var colorplus:Bool = false;
+	public var moredebug:Bool = false;
+	public var settingsmax:Bool = false;
+
+	//Optimizations
+	public var noneAnimations:Bool = false;
+	public var noneBGAnimated:Bool = false;
+	public var noneFixeds:Bool = false;
+	public var movedComponents:Bool = false;
+	public var updateState:Bool = false;
+	public var noneNet:Bool = false;
+	public var nonePost:Bool = false;
+	public var noneMods:Bool = false;
+	public var nonePlugins:Bool = false;
+	public var updateSettings:Bool = false;
+
+	//Others
+	public var coins:Int = 0;
+
+	//Cuidado con esta opcion cambia el juego sin ningun tipo de problema de rendimiento!!
+	//public var ultraMode:Bool = false; //Esta Funcion Fue eliminada en la Version 2.0
+	//Esta funcion da permiso a que puedas modificar cambiar usar animaciones sin tener en cuenta el rendimiento !!Solo para Pcs Modernas!!
+
+
 	public var noteOffset:Int = 0;
 	public var arrowRGB:Array<Array<FlxColor>> = [
 		[0xFFC24B99, 0xFFFFFFFF, 0xFF3C1F56],
@@ -38,13 +113,6 @@ class SaveVariables {
 		[0xFF71E300, 0xFFF6FFE6, 0xFF003100],
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
-	public var ghostTapping:Bool = true;
-	public var timeBarType:String = 'Time Left';
-	public var scoreZoom:Bool = true;
-	public var noReset:Bool = false;
-	public var healthBarAlpha:Float = 1;
-	public var hitsoundVolume:Float = 0;
-	public var pauseMusic:String = 'Tea Time';
 	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = true;
 	public var gameplaySettings:Map<String, Dynamic> = [
