@@ -24,6 +24,8 @@ import states.StoryMenuState;
 import states.OutdatedState;
 import states.MainMenuState;
 
+import objects.Notification;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
