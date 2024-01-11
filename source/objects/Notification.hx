@@ -45,7 +45,6 @@ class Notification extends FlxSpriteGroup {
 
 		if (PlayState.stageUI != "pixel") {
 		notiBG = new FlxSprite(-1000, -20).loadGraphic(Paths.image('notification_box'));
-		notiBG.setGraphicSize(420 + aumentwidth, 130 + aumentheight);
 		notiBG.antialiasing = ClientPrefs.data.antialiasing;
 		if (aumentheight != 0) notiBG.y += aumentheight;
 		notiBG.scrollFactor.set();
