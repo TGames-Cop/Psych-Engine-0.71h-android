@@ -3061,7 +3061,7 @@ class PlayState extends MusicBeatState
 			if(script != null)
 			{
 				script.call('onDestroy');
-				script.kill();
+				script.destroy();
 			}
 
 		while (hscriptArray.length > 0)
@@ -3219,7 +3219,7 @@ class PlayState extends MusicBeatState
 			if(newScript.parsingException != null)
 			{
 				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
-				newScript.kill();
+				newScript.destroy();
 				return;
 			}
 
@@ -3233,7 +3233,7 @@ class PlayState extends MusicBeatState
 						if (e != null)
 							addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, e.message.indexOf('\n'))}', FlxColor.RED);
 
-					newScript.kill();
+					newScript.destroy();
 					hscriptArray.remove(newScript);
 					trace('failed to initialize tea interp!!! ($file)');
 				}
@@ -3247,7 +3247,7 @@ class PlayState extends MusicBeatState
 			var newScript:HScript = cast (SScript.global.get(file), HScript);
 			if(newScript != null)
 			{
-				newScript.kill();
+				newScript.destroy();
 				hscriptArray.remove(newScript);
 			}
 		}

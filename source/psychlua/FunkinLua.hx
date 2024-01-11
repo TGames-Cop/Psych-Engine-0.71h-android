@@ -1791,7 +1791,7 @@ class FunkinLua {
 		{
 			hscript.active = false;
 			#if SScript
-			hscript.kill();
+			hscript.destroy();
 			#end
 			hscript = null;
 		}
