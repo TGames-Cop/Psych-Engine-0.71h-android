@@ -26,7 +26,7 @@ import openfl.system.System;
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
-class FPS extends TextField
+class COINS extends TextField
 {
 	/**
 		The current frame rate, expressed using frames-per-second
@@ -37,11 +37,7 @@ class FPS extends TextField
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
-	public function onColor() {
-		textColor = FlxG.random.color(FlxColor.BLACK, FlxColor.WHITE);
-	}
-
-	public function new(x:Float = 10, y:Float = 10, ?color:Int = 0x000000)
+	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
 		super();
 
@@ -76,25 +72,11 @@ class FPS extends TextField
 		currentTime += deltaTime;
 		times.push(currentTime);
 
-		var keyMode:Int = FlxG.keys.firstJustPressed();
-
-		var state:String = FlxG.state.toString();
-
 		if (PlayState.stageUI == "pixel") {
 			defaultTextFormat = new TextFormat("pixel.otf", 8);
 		}
 		if (PlayState.stageUI != "pixel") {
 			defaultTextFormat = new TextFormat("", 14);
-		}
-
-		if (FlxG.keys.justPressed.PLUS) {
-			FlxG.sound.changeVolume(0.1);
-		}
-		if (FlxG.keys.justPressed.MINUS) {
-			FlxG.sound.changeVolume(-0.1);
-		}
-		if (FlxG.mouse.visible == true) {
-			FlxG.mouse.visible = false;
 		}
 
 		while (times[0] < currentTime - 1000)
@@ -103,26 +85,24 @@ class FPS extends TextField
 		}
 
 		var currentCount = times.length;
-		currentFPS = Math.round((currentCount + cacheCount) / 2);
-		if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
+		var coins:Int = ClientPrefs.data.coins;
 
-		if (currentCount != cacheCount /*&& visible*/)
-		{
-			onColor();
+			if (ClientPrefs.data.language == 'Inglish') text = "\n[" + coins + "] POINTS";
 
-			text = "[" + currentFPS + "] Fps";
-			/*var memoryMegas:Float = 0;
-			
-			#if openfl
-			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += " | Memory: " + memoryMegas + " MB | Ending Corruption: " + MainMenuState.endingcorruptionVersion;
-			#end*/
+			if (ClientPrefs.data.language == 'Spanish') text = "\n[" + coins + "] PUNTOS";
 
-			//textColor = 0xFFFFFFFF;
+			if (ClientPrefs.data.language == 'Portuguese') text = "\n[" + coins + "] PONTOS";
 
-			if (/*memoryMegas > 3000 || */currentFPS <= ClientPrefs.data.framerate / 2)
+			textColor = 0xFFFFFFFF;
+			if (coins < 350)
 			{
-				textColor = 0xFFFF0000;
+				textColor = 0xFF900000;
+			}
+			if (coins < 0) {
+				ClientPrefs.data.coins = 0;
+			}
+			if (coins > 350) {
+				textColor = 0x948A00;
 			}
 
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
@@ -130,9 +110,6 @@ class FPS extends TextField
 			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
 			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
 			#end
-
-			text += "\n";
-		}
 
 		cacheCount = currentCount;
 	}

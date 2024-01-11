@@ -38,6 +38,8 @@ class Main extends Sprite
 	};
 
 	public static var fpsVar:FPS;
+	public static var memoryVar:MEMORY;
+	public static var coinVar:COINS;
 	public static var fpsBG:Sprite;
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -97,11 +99,28 @@ class Main extends Sprite
 		#end
 
 	
-		fpsVar = new FPS(5, 5, 0xFFFFFF);
-		addChild(fpsVar);
-		if(fpsVar != null) {
-			fpsVar.visible = ClientPrefs.data.showFPS;
-		}
+		if (ClientPrefs.data.noneAnimations) {
+			coinVar = new COINS(10, 3, 0xFFFFFF);
+			addChild(coinVar);
+			memoryVar = new MEMORY(10, 3, 0xFFFFFF);
+			addChild(memoryVar);
+			fpsVar = new FPS(10, 3, 0xFFFFFF);
+			addChild(fpsVar);
+			Lib.current.stage.align = "tl";
+			Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+			} else {
+			coinVar = new COINS(-60, 3, 0xFFFFFF);
+			coinVar.alpha = 0;
+			addChild(coinVar);
+			memoryVar = new MEMORY(-60, 3, 0xFFFFFF);
+			memoryVar.alpha = 0;
+			addChild(memoryVar);
+			fpsVar = new FPS(-60, 3, 0xFFFFFF);
+			fpsVar.alpha = 0;
+			addChild(fpsVar);
+			Lib.current.stage.align = "tl";
+			Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+			}
 		/*
 		fpsBG = new FPSBG(10, 3, 'test');
 		addChild(fpsBG);
@@ -166,7 +185,7 @@ class Main extends Sprite
 		dateNow = dateNow.replace(" ", "_");
 		dateNow = dateNow.replace(":", "'");
 
-		path = "./crash/" + "PsychEngine_" + dateNow + ".txt";
+		path = "./crash/" + "EndingAndroid_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -179,7 +198,7 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/beihu235/NF-Engine-new\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nUncaught Error: " + e.error + "\nReport this bug on Discord\n\n> Your Token: Your device cannot be added to the server";
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");

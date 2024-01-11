@@ -25,6 +25,8 @@ class SaveVariables {
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Tea Time';
+	public var disabledNoteRGB:Bool = false;
+	public var disableSplashRGB:Bool = true;
 
 	//Originals - Visuals
 	public var antialiasing:Bool = true;

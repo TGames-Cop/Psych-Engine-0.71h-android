@@ -5,7 +5,7 @@ import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
-import flixel.input.FlxKeyManager;
+import backend.Controls;
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -26,22 +26,21 @@ import openfl.system.System;
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
-class FPS extends TextField
+class MEMORY extends TextField
 {
 	/**
 		The current frame rate, expressed using frames-per-second
 	**/
 	public var currentFPS(default, null):Int;
+	public static var fullMemory:Float = 0;
 
 	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 
-	public function onColor() {
-		textColor = FlxG.random.color(FlxColor.BLACK, FlxColor.WHITE);
-	}
+	public var Timer:FlxTimer;
 
-	public function new(x:Float = 10, y:Float = 10, ?color:Int = 0x000000)
+	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
 		super();
 
@@ -76,9 +75,10 @@ class FPS extends TextField
 		currentTime += deltaTime;
 		times.push(currentTime);
 
-		var keyMode:Int = FlxG.keys.firstJustPressed();
-
-		var state:String = FlxG.state.toString();
+		if (FlxG.keys.pressed.ALT && FlxG.keys.pressed.ENTER) {
+			Sys.exit(1);
+			trace('Exit Mode');
+		}
 
 		if (PlayState.stageUI == "pixel") {
 			defaultTextFormat = new TextFormat("pixel.otf", 8);
@@ -87,40 +87,25 @@ class FPS extends TextField
 			defaultTextFormat = new TextFormat("", 14);
 		}
 
-		if (FlxG.keys.justPressed.PLUS) {
-			FlxG.sound.changeVolume(0.1);
-		}
-		if (FlxG.keys.justPressed.MINUS) {
-			FlxG.sound.changeVolume(-0.1);
-		}
-		if (FlxG.mouse.visible == true) {
-			FlxG.mouse.visible = false;
-		}
-
 		while (times[0] < currentTime - 1000)
 		{
 			times.shift();
 		}
 
 		var currentCount = times.length;
-		currentFPS = Math.round((currentCount + cacheCount) / 2);
-		if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 
-		if (currentCount != cacheCount /*&& visible*/)
-		{
-			onColor();
+			var memoryMegas:Float = 0;
 
-			text = "[" + currentFPS + "] Fps";
-			/*var memoryMegas:Float = 0;
-			
 			#if openfl
+			fullMemory = Math.abs(FlxMath.roundDecimal(System.totalMemory, 1));
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += " | Memory: " + memoryMegas + " MB | Ending Corruption: " + MainMenuState.endingcorruptionVersion;
-			#end*/
+			if (ClientPrefs.data.moredebug == false || ClientPrefs.data.nonePlugins) text = "              [" + memoryMegas + "]MBs";
 
-			//textColor = 0xFFFFFFFF;
+			if (ClientPrefs.data.moredebug == true && !ClientPrefs.data.nonePlugins) text = "              [" + memoryMegas + "]MBs  [Error your Device is not Compatible with this plugin]";
+			#end
 
-			if (/*memoryMegas > 3000 || */currentFPS <= ClientPrefs.data.framerate / 2)
+			textColor = 0xFFFFFFFF;
+			if (memoryMegas > 3000)
 			{
 				textColor = 0xFFFF0000;
 			}
@@ -132,7 +117,6 @@ class FPS extends TextField
 			#end
 
 			text += "\n";
-		}
 
 		cacheCount = currentCount;
 	}

@@ -16,6 +16,8 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 
+import flixel.effects.FlxFlicker;
+
 import shaders.ColorSwap;
 
 import states.StoryMenuState;
@@ -147,12 +149,7 @@ class TitleState extends MusicBeatState
 		lang = 'psych0.71h 安卓端口测试\nb站-北狐丶逐梦移植\n禁止上传到任何资源网站';
 		else
 		lang = 'Ending Corruption V2.0\nPort by ThonnyDev - TGames | CamelyGamer';
-		if(!checkToast){
-				
-		checkToast = true;
 		AndroidDialogsExtend.OpenToast(lang, 1);
-		
-		}
 		#end
 		
 		#if android
