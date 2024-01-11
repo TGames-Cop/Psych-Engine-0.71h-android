@@ -184,6 +184,10 @@ class MusicBeatState extends FlxUIState
 		}
 	}
 
+	public static function updatestate(text:String) {
+		//Esto fue para ahorrarme tiempo. esta funcion no era visible en android
+	}
+
 	private function rollbackSection():Void
 	{
 		if(curStep < 0) return;
