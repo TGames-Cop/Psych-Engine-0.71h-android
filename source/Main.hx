@@ -6,6 +6,8 @@ import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.FPS;
+import openfl.display.MEMORY;
+import openfl.display.COINS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
