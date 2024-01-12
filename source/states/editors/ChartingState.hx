@@ -213,7 +213,13 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				gfVersion: 'gf',
 				speed: 1,
-				stage: 'stage'
+				stage: 'stage',
+				mision1: false,
+				mision2: false,
+				mision3: false,
+				mision4: false,
+				mision5: false,
+				BGFreeplay: ''
 			};
 			addSection();
 			PlayState.SONG = _song;

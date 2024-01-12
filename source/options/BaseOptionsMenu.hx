@@ -72,11 +72,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		descText.alpha = 0;
-		FlxTween.tween(descText, {alpha: 1}, 5, {
-			onComplete: function (twn:FlxTween) {
-				ready = true;
-			}
-		});
+		FlxTween.tween(descText, {alpha: 1}, 5);
 		add(descText);
 
 		for (i in 0...optionsArray.length)
