@@ -467,7 +467,7 @@ class TitleState extends MusicBeatState
 		}
 
 		#if android
-			AndroidDialogsExtend.OpenToast("No pudimos comprobar si tienes pantallas curvas\nSe activaran las opciones de Ajuste por Emergencia", 3);
+			AndroidDialogsExtend.OpenToast("No pudimos comprobar si tienes pantallas curvas\nSe activaran las opciones de Ajuste por Emergencia", 7);
 		#end
 
 		// credGroup.add(credTextShit);

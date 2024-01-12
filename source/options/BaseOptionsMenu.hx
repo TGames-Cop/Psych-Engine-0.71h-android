@@ -33,10 +33,16 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		#end
 		
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xFFea71fd;
+		bg.color = 0x000000;
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
+
+		var bgApha:FlxSprite = new FlxSprite().makeGraphic(0, 0, 0xA0000000);
+		bgApha.screenCenter();
+		bgApha.alpha = 0;
+		FlxTween.tween(bgApha, {alpha: 1}, 4);
+		add(bgApha);
 
 		// avoids lagspikes while scrolling through menus!
 		grpOptions = new FlxTypedGroup<Alphabet>();
@@ -49,24 +55,35 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		add(checkboxGroup);
 
 		descBox = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
-		descBox.alpha = 0.6;
+		//descBox.alpha = 0.6;
+		descBox.alpha = 0;
+		FlxTween.tween(descBox, {alpha: 0.6}, 4);
 		add(descBox);
 
 		var titleText:Alphabet = new Alphabet(75, 45, title, true);
 		titleText.setScale(0.6);
-		titleText.alpha = 0.4;
+		//titleText.alpha = 0.4;
+		titleText.alpha = 0;
+		FlxTween.tween(titleText, {alpha: 0.4}, 4);
 		add(titleText);
 
 		descText = new FlxText(50, 600, 1180, "", 32);
-		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.BLACK, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.WHITE);
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
+		descText.alpha = 0;
+		FlxTween.tween(descText, {alpha: 1}, 5, {
+			onComplete: function (twn:FlxTween) {
+				ready = true;
+			}
+		});
 		add(descText);
 
 		for (i in 0...optionsArray.length)
 		{
 			var optionText:Alphabet = new Alphabet(290, 260, optionsArray[i].name, false);
 			optionText.isMenuItem = true;
+			optionText.alpha = 0;
 			/*optionText.forceX = 300;
 			optionText.yMult = 90;*/
 			optionText.targetY = i;
@@ -76,6 +93,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				var checkbox:CheckboxThingie = new CheckboxThingie(optionText.x - 105, optionText.y, optionsArray[i].getValue() == true);
 				checkbox.sprTracker = optionText;
 				checkbox.ID = i;
+				checkbox.alpha = 0;
+				FlxTween.tween(checkbox, {alpha: 1}, 4);
 				checkboxGroup.add(checkbox);
 			} else {
 				optionText.x -= 80;
@@ -85,16 +104,18 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				valueText.sprTracker = optionText;
 				valueText.copyAlpha = true;
 				valueText.ID = i;
+				valueText.alpha = 0;
+				FlxTween.tween(valueText, {alpha: 1}, 4);
 				grpTexts.add(valueText);
 				optionsArray[i].child = valueText;
 			}
 			//optionText.snapToPosition(); //Don't ignore me when i ask for not making a fucking pull request to uncomment this line ok
 			updateTextFrom(optionsArray[i]);
 		}
-		
-		        #if android
-                addVirtualPad(FULL, A_B_C);
-                #end
+
+		#if android
+			addVirtualPad(FULL, A_B_C);
+		#end
 
 		changeSelection();
 		reloadCheckboxes();
@@ -119,9 +140,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (controls.BACK || FlxG.android.justPressed.BACK) {
 			#if android
-			FlxTransitionableState.skipNextTransOut = true;
+			//FlxTransitionableState.skipNextTransOut = true;
 			FlxG.resetState();
 			ClientPrefs.saveSettings();
 			#else

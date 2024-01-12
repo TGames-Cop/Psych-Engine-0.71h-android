@@ -145,6 +145,11 @@ class MainMenuState extends MusicBeatState
 					onComplete: function (twn:FlxTween) {
 						if (selectedSomethin != true && !ClientPrefs.data.noneAnimations) changeItem();
 						if (ClientPrefs.data.noneAnimations) OptiChangeItem();
+
+						if (!selectedSomethin) {
+							FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.5);
+							FlxTween.tween(videoButton, {y: settingButton.y + videoButton.height + 5}, 0.5);
+						}
 					}
 				});
 			}
@@ -274,7 +279,7 @@ class MainMenuState extends MusicBeatState
 		settingIcon.alpha = 1;
 		//add(settingIcon);
 
-		settingButton = new FlxButton(FlxG.width - 100, FlxG.height - 150, "", onClickSetting);
+		settingButton = new FlxButton(FlxG.width - 100, 0, "", onClickSetting);
 		settingButton.loadGraphicFromSprite(settingIcon);
 		settingButton.scrollFactor.set();
 
@@ -503,7 +508,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 
-			if (controls.BACK)
+			if (controls.BACK || FlxG.android.justPressed.BACK)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.RED : 0x4CFF0000, 1);
