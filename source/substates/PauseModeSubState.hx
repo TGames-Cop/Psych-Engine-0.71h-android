@@ -81,6 +81,7 @@ class PauseModeSubState extends MusicBeatSubstate
             overlaySelected = new FlxSprite(0, 0).loadGraphic(Paths.image('pausemenu/OverlayOption'));
             overlaySelected.antialiasing = ClientPrefs.data.antialiasing;
             overlaySelected.alpha = 0;
+            overlaySelected.visible = false;
             add(overlaySelected);
 
             var levelInfo:FlxText = new FlxText(20,15, 0, 'Notas Presionas: ' + PlayState.hitnotesong + ' | ' + PlayState.SONG.song + ' | ' + Difficulty.getString().toUpperCase(), 32);
@@ -175,7 +176,6 @@ class PauseModeSubState extends MusicBeatSubstate
                                 missingTextBG.visible = true;
                                 FlxG.sound.play(Paths.sound('cancelMenu'));
             
-                                super.update(elapsed);
                                 return;
                             }
                             regenMenu();
@@ -221,6 +221,8 @@ class PauseModeSubState extends MusicBeatSubstate
                 }
             }
         }
+
+       // super.update(elapsed);
         }
 
                 function deleteSkipTimeText()
@@ -275,9 +277,9 @@ class PauseModeSubState extends MusicBeatSubstate
                                         item.alpha = 1;
                                         item.screenCenter(X);
 
-                                        overlaySelected.setGraphicSize(item.width + 25, item.height + 25);
-                                        overlaySelected.y = item.y + 3;
-                                        overlaySelected.screenCenter(X);
+                                       // overlaySelected.setGraphicSize(item.width + 25, item.height + 25);
+                                       // overlaySelected.y = item.y + 3;
+                                       // overlaySelected.screenCenter(X);
                                     }
                         
                                 }

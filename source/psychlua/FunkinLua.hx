@@ -831,10 +831,11 @@ class FunkinLua {
 		});
 
 		// others
-		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, arg1:Dynamic, arg2:Dynamic) {
+		Lua_helper.add_callback(lua, "triggerEvent", function(name:String, arg1:Dynamic, arg2:Dynamic, arg3:Dynamic) {
 			var value1:String = arg1;
 			var value2:String = arg2;
-			game.triggerEvent(name, value1, value2, Conductor.songPosition);
+			var value3:String = arg3;
+			game.triggerEvent(name, value1, value2, value3, Conductor.songPosition);
 			//trace('Triggered event: ' + name + ', ' + value1 + ', ' + value2);
 			return true;
 		});
@@ -925,10 +926,15 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "cameraSetTarget", function(target:String) {
 			var isDad:Bool = false;
+			var isBF:Bool = false;
 			if(target == 'dad') {
 				isDad = true;
+				isBF = false;
+			} else {
+				isDad = false;
+				isBF = true;
 			}
-			game.moveCamera(isDad);
+			game.moveCamera(isDad, isBF);
 			return isDad;
 		});
 		Lua_helper.add_callback(lua, "cameraShake", function(camera:String, intensity:Float, duration:Float) {
