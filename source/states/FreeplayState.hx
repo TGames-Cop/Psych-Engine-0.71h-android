@@ -17,6 +17,8 @@ import substates.ResetScoreSubState;
 import sys.FileSystem;
 #end
 
+import flixel.ui.FlxButton;
+
 class FreeplayState extends MusicBeatState
 {
 	var songs:Array<SongMetadata> = [];
@@ -66,6 +68,9 @@ class FreeplayState extends MusicBeatState
 
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+
+	var leftArrowButton:FlxButton;
+	var rightArrowButton:FlxButton;
 
 	var MISS:Array<String>;
 
@@ -258,6 +263,16 @@ class FreeplayState extends MusicBeatState
 		rightArrow.antialiasing = ClientPrefs.data.antialiasing;
 		rightArrow.x = FlxG.width - rightArrow.width - 5;
 		add(rightArrow);
+
+		leftArrowButton = new FlxButton(leftArrow.x, 0, "", onLeft);
+		leftArrowButton.screenCenter(Y);
+		leftArrowButton.loadGraphicFromSprite(leftArrow);
+		add(leftArrowButton);
+
+		rightArrowButton = new FlxButton(rightArrow.x , 0, "", onRight);
+		rightArrowButton.screenCenter(Y);
+		rightArrowButton.loadGraphicFromSprite(rightArrow);
+		add(rightArrowButton);
 		
 		updateTexts();
 		add(black);
@@ -283,6 +298,32 @@ class FreeplayState extends MusicBeatState
 	function weekIsLocked(name:String):Bool {
 		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
+	}
+
+	function onLeft() {
+		FlxTween.tween(leftArrowButton, {alpha: 1}, 0.2, {
+			ease: FlxEase.circInOut,
+			type: BACKWARD
+		});
+		FlxTween.tween(leftArrowButton, {x: 0 + 10}, 0.3, {
+			ease: FlxEase.circInOut,
+			type: BACKWARD
+		});
+
+		changeSelection(-1);
+	}
+
+	function onRight() {
+		FlxTween.tween(rightArrowButton, {alpha: 1}, 0.2, {
+			ease: FlxEase.circInOut,
+			type: BACKWARD
+		});
+		FlxTween.tween(rightArrowButton, {x: rightArrow.x + 10}, 0.3, {
+			ease: FlxEase.circInOut,
+			type: BACKWARD
+		});
+
+		changeSelection(1);
 	}
 
 	var instPlaying:Int = -1;
@@ -315,6 +356,13 @@ class FreeplayState extends MusicBeatState
 				ease: FlxEase.circInOut,
 				type: BACKWARD
 			});
+
+			var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
+			holdTime += elapsed;
+			var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
+
+			if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
+				changeSelection((checkNewHold - checkLastHold));
 		}
 
 		if (FlxG.sound.music.volume < 0.7)
