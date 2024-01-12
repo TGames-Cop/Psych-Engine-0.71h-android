@@ -450,7 +450,7 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		else if (controls.ACCEPT || FlxG.mouse.justPressed || FlxG.mouse.justPressedMiddle)
+		else if (controls.ACCEPT)
 		{
 			persistentUpdate = false;
 			FlxG.sound.music.fadeOut(2, 0);

@@ -135,10 +135,18 @@ class MainMenuState extends MusicBeatState
 	public static var statusOptions:Bool = false;
 
 	public function onEffect(Timer:FlxTimer):Void {
+		if (!selectedSomethin) {
+			FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.01);
+			FlxTween.tween(videoButton, {y: settingButton.y + settingButton.height + videoButton.height + 5}, 0.01);
+		}
 		if (selectedSomethin != true && !ClientPrefs.data.noneAnimations) changeItem();
 		if (ClientPrefs.data.noneAnimations) OptiChangeItem();
 		FlxTween.tween(bgCG, {alpha: 0}, ClientPrefs.data.timetrans, {
 			onComplete: function (twn:FlxTween) {
+				if (!selectedSomethin) {
+					FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.01);
+					FlxTween.tween(videoButton, {y: settingButton.y + settingButton.height + videoButton.height + 5}, 0.01);
+				}
 				if (selectedSomethin != true && !ClientPrefs.data.noneAnimations) changeItem();
 				if (ClientPrefs.data.noneAnimations) OptiChangeItem();
 				FlxTween.tween(bgCG, {alpha: 1}, ClientPrefs.data.timetrans, {
@@ -147,8 +155,8 @@ class MainMenuState extends MusicBeatState
 						if (ClientPrefs.data.noneAnimations) OptiChangeItem();
 
 						if (!selectedSomethin) {
-							FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.5);
-							FlxTween.tween(videoButton, {y: settingButton.y + videoButton.height + 5}, 0.5);
+							FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.01);
+							FlxTween.tween(videoButton, {y: settingButton.y + settingButton.height + videoButton.height + 5}, 0.01);
 						}
 					}
 				});
