@@ -43,12 +43,16 @@ class EstadisticsMenuState extends MusicBeatState {
             if (ClientPrefs.data.language == 'Portuguese') {
                 BaseText.text = 'Estatisticas: \n\nNotas pressionadas: ' + PlayState.hitnotesong + ' Notas\n\nNotas com falha: ' + PlayState.missNotesong + ' Falhas\n\nMortes: ' + PlayState.deaths + ' Mortes\n\nPontuação total: ' + PlayState.scoresTotal + ' Pontos';
             }
+
+            #if android
+            addVirtualPad(NONE, B);
+            #end
     }
 
     override function update(elapsed:Float) {
         var back:Bool = controls.BACK;
 
-        if (back) {
+        if (back || FlxG.android.justPressed.BACK) {
             FlxG.sound.play(Paths.sound('confirmMenu'));
             MusicBeatState.switchState(new MainMenuState());
         }

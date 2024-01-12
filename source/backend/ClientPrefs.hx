@@ -41,7 +41,7 @@ class SaveVariables {
 
 	//System Versions
 	public var endingCorruprion:String = '2.0';
-	public var endingEngine:String = '2.3';
+	public var endingEngine:String = '1.5';
 	public var pathVersion:String = '1.0';
 	public var username:String = 'User';
 
