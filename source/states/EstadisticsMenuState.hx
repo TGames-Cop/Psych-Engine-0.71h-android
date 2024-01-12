@@ -22,31 +22,27 @@ class EstadisticsMenuState extends MusicBeatState {
         var bg:FlxSprite = new FlxSprite().makeGraphic(0, 0, FlxColor.BLACK);
         add(bg);
 
-        if (ClientPrefs.data.language == 'Spanish') {
-        BaseText = new FlxText(0, 0, FlxG.width,
-           'Estadisticas: \n\nNotas Presionadas: ' + PlayState.hitnotesong + ' Notas\n\nNotas Falladas: ' + PlayState.missNotesong + ' Fallas\n\nMuertes: ' + PlayState.deaths + ' Muertes\n\nPuntaje Total: ' + PlayState.scoresTotal + ' Puntos\n\nPUNTOS: ' + PlayState.pointsWin + ' puntos',
-            32);
-        Notetext = new FlxText(0, 0, FlxG.width,
-            note + '!!ESTAS ESTADISTICAS SON TEMPORABLES!!\nLAS ESTADISTICAS SE REINICIAN AL SALIR',
-        32);
-        }
-        if (ClientPrefs.data.language == 'Inglish') {
-            BaseText = new FlxText(0, 0, FlxG.width,
-           'Statistics: \n\nPressed Notes: ' + PlayState.hitnotesong + ' Notes\n\nFailed Notes: ' + PlayState.missNotesong + ' Misses\n\nDeaths: ' + PlayState.deaths + ' deaths\n\nTotal score: ' + PlayState.scoresTotal + ' Points',
-            32);
-        }
-        if (ClientPrefs.data.language == 'Portuguese') {
-            BaseText = new FlxText(0, 0, FlxG.width,
-           'Estatisticas: \n\nNotas pressionadas: ' + PlayState.hitnotesong + ' Notas\n\nNotas com falha: ' + PlayState.missNotesong + ' Falhas\n\nMortes: ' + PlayState.deaths + ' Mortes\n\nPontuação total: ' + PlayState.scoresTotal + ' Pontos',
-            32);
-        }
+        BaseText = new FlxText(0, 0, FlxG.width, "", 32);
         BaseText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, OUTLINE_FAST, FlxColor.BLACK);
         BaseText.screenCenter();
         add(BaseText);
 
+        Notetext = new FlxText(0, 0, FlxG.width, "", 32);
         Notetext.setFormat("nullFont.ttf", 32, FlxColor.RED, CENTER, OUTLINE_FAST, FlxColor.BLACK);
         Notetext.screenCenter();
         add(Notetext);
+
+        if (ClientPrefs.data.language == 'Spanish') Notetext.text = note + '!!ESTAS ESTADISTICAS SON TEMPORABLES!!\nLAS ESTADISTICAS SE REINICIAN AL SALIR';
+
+        if (ClientPrefs.data.language == 'Spanish') {
+            BaseText.text = 'Estadisticas: \n\nNotas Presionadas: ' + PlayState.hitnotesong + ' Notas\n\nNotas Falladas: ' + PlayState.missNotesong + ' Fallas\n\nMuertes: ' + PlayState.deaths + ' Muertes\n\nPuntaje Total: ' + PlayState.scoresTotal + ' Puntos\n\nPUNTOS: ' + PlayState.pointsWin + ' puntos';
+            }
+            if (ClientPrefs.data.language == 'Inglish') {
+                BaseText.text = 'Statistics: \n\nPressed Notes: ' + PlayState.hitnotesong + ' Notes\n\nFailed Notes: ' + PlayState.missNotesong + ' Misses\n\nDeaths: ' + PlayState.deaths + ' deaths\n\nTotal score: ' + PlayState.scoresTotal + ' Points';
+            }
+            if (ClientPrefs.data.language == 'Portuguese') {
+                BaseText.text = 'Estatisticas: \n\nNotas pressionadas: ' + PlayState.hitnotesong + ' Notas\n\nNotas com falha: ' + PlayState.missNotesong + ' Falhas\n\nMortes: ' + PlayState.deaths + ' Mortes\n\nPontuação total: ' + PlayState.scoresTotal + ' Pontos';
+            }
     }
 
     override function update(elapsed:Float) {

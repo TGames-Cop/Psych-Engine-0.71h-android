@@ -90,9 +90,10 @@ class StoryMenuState extends MusicBeatState
 		bGame = new FlxSprite(0, 0);
 		bGame.antialiasing = ClientPrefs.data.antialiasing;
 
-		txtWeekTitle = new FlxText(0, 10, 0, "", 60);
-		txtWeekTitle.setFormat("miss.ttf", 60, FlxColor.WHITE, RIGHT);
+		txtWeekTitle = new FlxText(0, 10, FlxG.width, "", 60);
+		txtWeekTitle.setFormat("miss.ttf", 60, FlxColor.WHITE, CENTER);
 		txtWeekTitle.alpha = 0.7;
+		txtWeekTitle.screenCenter(X);
 
 		bg_Warning = new FlxSprite().loadGraphic(Paths.image('Peligro_BG'));
 		bg_Warning.antialiasing = ClientPrefs.data.antialiasing;
@@ -236,7 +237,7 @@ class StoryMenuState extends MusicBeatState
 		MusicBeatState.updatestate('StoryMode');
 
 		#if android
-			addVirtualPad(MainMenuState, A_B);
+			addVirtualPad(LEFT_RIGHT, A_B);
 		#end
 
 		super.create();
@@ -463,7 +464,7 @@ class StoryMenuState extends MusicBeatState
 
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();
-		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
+		//txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 		txtWeekTitle.y = FlxG.height - (txtWeekTitle.height + 10);
 
 		var bullShit:Int = 0;

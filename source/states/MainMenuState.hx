@@ -561,9 +561,9 @@ class MainMenuState extends MusicBeatState
 											case 'freeplay':
 												MusicBeatState.switchState(new FreeplayState());
 											case 'statistics':
-												//MusicBeatState.switchState(new EstadisticsMenuState());
+												MusicBeatState.switchState(new EstadisticsMenuState());
 											case 'links':
-												//MusicBeatState.switchState(new LinksState());
+												MusicBeatState.switchState(new LinksState());
 										}
 									}});
 							});
