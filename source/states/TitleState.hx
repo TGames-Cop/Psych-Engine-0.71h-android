@@ -632,11 +632,11 @@ class TitleState extends MusicBeatState
 				
 				if (ClientPrefs.data.musicState != 'disabled')	FlxG.sound.music.fadeIn(2, 0, 1.2);
 				case 2:
-					addMoreText('Ending');
+					addMoreText('Ending\nCorruption');
 				case 3:
-					addMoreText('Corruption');
-				case 4:
 					addMoreText(ClientPrefs.data.endingCorruprion, 0, FlxColor.RED);
+				case 4:
+					addMoreText("Android", 0, FlxColor.GREEN);
 				case 5:
 					deleteCoolText();
 				case 6:

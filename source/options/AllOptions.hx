@@ -74,7 +74,7 @@ class AllOptions extends BaseOptionsMenu {
             var option:Option = new Option('FPS X',
             'Set a specific X location of the information bar\nFPS/MEMORY/COINS',
             'fpsX',
-            'bool');
+            'int');
             option.minValue = 0;
             option.maxValue = FlxG.width;
             option.changeValue = 1;
@@ -84,7 +84,7 @@ class AllOptions extends BaseOptionsMenu {
             var option:Option = new Option('FPS Y',
             'Set a specific Y location of the information bar\nFPS/MEMORY/COINS',
             'fpsY',
-            'bool');
+            'int');
             option.minValue = 0;
             option.maxValue = FlxG.height;
             option.changeValue = 1;
@@ -169,7 +169,7 @@ addOption(option);
 var option:Option = new Option('FPS X',
 'Establece una ubicación X específica de la barra de información\nFPS/MEMORIA/MONEDAS',
 'fpsX',
-'bool');
+'int');
 option.minValue = 0;
 option.maxValue = FlxG.width;
 option.changeValue = 1;
@@ -179,7 +179,7 @@ addOption(option);
 var option:Option = new Option('FPS Y',
 'Establece una ubicación Y específica de la barra de información\nFPS/MEMORIA/MONEDAS',
 'fpsY',
-'bool');
+'int');
 option.minValue = 0;
 option.maxValue = FlxG.height;
 option.changeValue = 1;
@@ -241,22 +241,22 @@ addOption(option);
     var option:Option = new Option('FPS X',
     'Defina um local X específico da barra de informações\nFPS/MEMORY/COINS',
     'fpsX',
-    'bool');
+    'int');
+    addOption(option);
     option.minValue = 0;
     option.maxValue = FlxG.width;
     option.changeValue = 1;
     option.onChange = fpsNew;
-    addOption(option);
 
     var option:Option = new Option('FPS Y',
     'Defina um local Y específico da barra de informações\nFPS/MEMORY/COINS',
     'fpsY',
-    'bool');
+    'int');
+    addOption(option);
     option.minValue = 0;
     option.maxValue = FlxG.height;
     option.changeValue = 1;
     option.onChange = fpsNew;
-    addOption(option);
         }
 
         super();

@@ -24,12 +24,10 @@ class EstadisticsMenuState extends MusicBeatState {
 
         BaseText = new FlxText(0, 0, FlxG.width, "", 32);
         BaseText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER, OUTLINE_FAST, FlxColor.BLACK);
-        BaseText.screenCenter();
         add(BaseText);
 
         Notetext = new FlxText(0, 0, FlxG.width, "", 32);
         Notetext.setFormat("nullFont.ttf", 32, FlxColor.RED, CENTER, OUTLINE_FAST, FlxColor.BLACK);
-        Notetext.screenCenter();
         add(Notetext);
 
         if (ClientPrefs.data.language == 'Spanish') Notetext.text = note + '!!ESTAS ESTADISTICAS SON TEMPORABLES!!\nLAS ESTADISTICAS SE REINICIAN AL SALIR';
@@ -43,6 +41,9 @@ class EstadisticsMenuState extends MusicBeatState {
             if (ClientPrefs.data.language == 'Portuguese') {
                 BaseText.text = 'Estatisticas: \n\nNotas pressionadas: ' + PlayState.hitnotesong + ' Notas\n\nNotas com falha: ' + PlayState.missNotesong + ' Falhas\n\nMortes: ' + PlayState.deaths + ' Mortes\n\nPontuação total: ' + PlayState.scoresTotal + ' Pontos';
             }
+
+            BaseText.screenCenter();
+            Notetext.screenCenter();
 
             #if android
             addVirtualPad(NONE, B);

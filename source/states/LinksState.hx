@@ -75,7 +75,9 @@ class LinksState extends MusicBeatState
 			['Gamejolt',			'gamejolt',		'Gamejolt.com/games/EndingCorruptionDemo', 'https://gamejolt.com/games/EndingCorruptionDemo/845799', '5E00FF00', 'Gamejolt.com'],
 			['Discord',				'discord',		'discord.gg/UPYsecaNQC',					'https://discord.gg/UPYsecaNQC',				'5E00A6FF',		'discord.gg'],
 			['Assistant - CamelyGamer'],
-			['Discord',				'discord',		'camelygamer_44692', 						'https://discord.com/channels/@me',				'0070cc',		'discord.gg']
+			['Discord',				'discord',		'camelygamer_44692', 						'https://discord.com/channels/@me',				'0070cc',		'discord.gg'],
+			['FNF ANDROID BASE\nDxgamer7405'],
+			['GitHub',				'github',		'https://github.com/Dxgamer7405',			'https://github.com/Dxgamer7405/Psych-0.5.1-Android',	'8f8f8f',	'GitHub.com']
 		];
 		
 		for(i in defaultList) {

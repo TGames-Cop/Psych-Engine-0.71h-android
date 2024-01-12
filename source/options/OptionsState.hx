@@ -186,10 +186,12 @@ class OptionsState extends MusicBeatState
 			add(controlsButton);
 			add(reloadButton);
 
+			if (!ClientPrefs.data.noneAnimations) {
 		FlxTween.angle(reloadButton, 0, 360, 3, {
 			ease: FlxEase.circInOut,
 			type: LOOPING
 		});
+	}
 
 		if (ClientPrefs.data.graphics_internal != 'Low') {
 		TimerEffectvineta = new FlxTimer();
@@ -198,10 +200,12 @@ class OptionsState extends MusicBeatState
 
 		MusicBeatState.updatestate('Options Menu');
 
+		if (!ClientPrefs.data.noneAnimations) {
 		FlxTween.angle(controlsButton, -30, 30, 2, {
 			ease: FlxEase.expoInOut,
 			type: PINGPONG
 		});
+	}
 
 		#if android
 		addVirtualPad(MainMenuState, A_B);

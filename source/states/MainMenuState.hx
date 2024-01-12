@@ -369,11 +369,11 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	#if android
-	if (ClientPrefs.data.language == 'Spanish') AndroidDialogsExtend.OpenToast("!Error!\nTu Dispositivo no es compatible con los servicios\nde Internet", 5);
+		if (ClientPrefs.data.language == 'Spanish' && ClientPrefs.data.noneNet) AndroidDialogsExtend.OpenToast("!Error!\nTu Dispositivo no es compatible con los servicios\nde Internet", 5);
 
-	if (ClientPrefs.data.language == 'Inglish') AndroidDialogsExtend.OpenToast("!Error!\nYour Device is not compatible with Internet services", 5);
+		if (ClientPrefs.data.language == 'Inglish' && ClientPrefs.data.noneNet) AndroidDialogsExtend.OpenToast("!Error!\nYour Device is not compatible with Internet services", 5);
 
-	if (ClientPrefs.data.language == 'Portuguese') AndroidDialogsExtend.OpenToast("!Error!\nSeu dispositivo não é compatível com serviços de Internet", 5);
+		if (ClientPrefs.data.language == 'Portuguese' && ClientPrefs.data.noneNet) AndroidDialogsExtend.OpenToast("!Error!\nSeu dispositivo não é compatível com serviços de Internet", 5);
 	#end
 
 		super.create();

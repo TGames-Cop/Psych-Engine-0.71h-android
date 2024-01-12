@@ -162,9 +162,9 @@ class Character extends FlxSprite
 						var animLoop:Bool = !!anim.loop; //Bruh
 						var animIndices:Array<Int> = anim.indices;
 						if(animIndices != null && animIndices.length > 0) {
-							animation.addByIndices(animAnim, animName, animIndices, "", animFps, animLoop);
+							animation.addByIndices(animAnim, animName, animIndices, "", ClientPrefs.data.SpritesFPS, animLoop);
 						} else {
-							animation.addByPrefix(animAnim, animName, animFps, animLoop);
+							animation.addByPrefix(animAnim, animName, ClientPrefs.data.SpritesFPS, animLoop);
 						}
 
 						if(anim.offsets != null && anim.offsets.length > 1) {

@@ -307,10 +307,13 @@ class FreeplayState extends MusicBeatState
 			ease: FlxEase.circInOut,
 			type: BACKWARD
 		});
+		
+		if (!ClientPrefs.data.noneAnimations) {
 		FlxTween.tween(leftArrowButton, {x: 0 + 10}, 0.3, {
 			ease: FlxEase.circInOut,
 			type: BACKWARD
 		});
+	}
 
 		changeSelection(-1);
 	}
@@ -320,10 +323,13 @@ class FreeplayState extends MusicBeatState
 			ease: FlxEase.circInOut,
 			type: BACKWARD
 		});
+
+		if (!ClientPrefs.data.noneAnimations) {
 		FlxTween.tween(rightArrowButton, {x: rightArrow.x + 10}, 0.3, {
 			ease: FlxEase.circInOut,
 			type: BACKWARD
 		});
+	}
 
 		changeSelection(1);
 	}
