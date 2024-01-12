@@ -40,7 +40,7 @@ class HealthBar extends FlxSpriteGroup
 		rightBar.antialiasing = ClientPrefs.data.antialiasing;
 
 		bg.angle = angle;
-		leftBar = angle;
+		leftBar.angle = angle;
 		rightBar.angle = angle;
 
 		add(leftBar);
