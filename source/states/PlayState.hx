@@ -2461,13 +2461,6 @@ class PlayState extends MusicBeatState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
-		if (FlxG.keys.justPressed.SHIFT && boyfriend.animOffsets.exists('hey') || MusicBeatState.androidc.newhbox.buttonShift.justPressed && MusicBeatState.androidc.mode == HITBOX) {
-			boyfriend.playAnim('hey');
-			boyfriend.specialAnim = true;
-
-			heyanim += 1;
-		}
-
 		if (songMisses > 5) status3 = true;
 
 		if (FlxG.keys.justPressed.CONTROL) {
@@ -2483,16 +2476,6 @@ class PlayState extends MusicBeatState
 
 			cpuControlled = mode;
 		}
-		if (ClientPrefs.data.dodge == true) {
-		if (FlxG.keys.justPressed.SPACE || MusicBeatState.androidc.newhbox.buttonSpace.justPressed && MusicBeatState.androidc.mode == HITBOX) {
-			if (boyfriend.animOffsets.exists('dodge')) boyfriend.playAnim('dodge');
-			if (boyfriend.animOffsets.exists('dodge')) boyfriend.specialAnim = true;
-			doge = true;
-			if (doge != false) {
-			FadeTime.start(0.7, onDodge, 1);
-			}
-		}
-	}
 	}
 
 	function openPauseMenu()
