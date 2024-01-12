@@ -19,7 +19,7 @@ class HealthBar extends FlxSpriteGroup
 	public var barHeight(default, set):Int = 1;
 	public var barOffset:FlxPoint = new FlxPoint(3, 3);
 
-	public function new(x:Float, y:Float, image:String = 'healthBar', valueFunction:Void->Float = null, boundX:Float = 0, boundY:Float = 1)
+	public function new(x:Float, y:Float, image:String = 'healthBar', valueFunction:Void->Float = null, boundX:Float = 0, boundY:Float = 1, ?angle:Int)
 	{
 		super(x, y);
 		
@@ -38,6 +38,10 @@ class HealthBar extends FlxSpriteGroup
 		rightBar = new FlxSprite().makeGraphic(Std.int(bg.width), Std.int(bg.height), FlxColor.WHITE);
 		rightBar.color = FlxColor.BLACK;
 		rightBar.antialiasing = ClientPrefs.data.antialiasing;
+
+		bg.angle = angle;
+		leftBar = angle;
+		rightBar.angle = angle;
 
 		add(leftBar);
 		add(rightBar);

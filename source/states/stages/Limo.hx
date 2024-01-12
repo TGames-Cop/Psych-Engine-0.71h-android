@@ -36,6 +36,8 @@ class Limo extends BaseStage
 	var limo2:BGSprite;
 	var bgLimo2:BGSprite;
 
+	var skyBGFULL:FlxSprite;
+
 	public function onMovimentspeed(Timer:FlxTimer)
 		{
 			FlxTween.tween(bgLimo, {x: bgLimo.x - 120}, 5, {
@@ -94,6 +96,11 @@ class Limo extends BaseStage
 			add(grpLimoParticles);
 
 			skyBG2 = new BGSprite('limo/limoSunset-2', -120, -50, 0.1, 0.1);
+			//skyBG2.visible = false;
+			skyBG2.alpha = 0;
+			add(skyBG2);
+
+			skyBGFULL = new BGSprite('limo/limoSunset-2', -120, -50, 0.1, 0.1);
 			//skyBG2.visible = false;
 			skyBG2.alpha = 0;
 			add(skyBG2);

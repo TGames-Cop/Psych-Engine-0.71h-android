@@ -147,6 +147,8 @@ class FunkinLua {
 		set('altAnim', false);
 		set('gfSection', false);
 
+		//onEventPushed
+
 		// Gameplay settings
 		set('healthGainMult', game.healthGain);
 		set('healthLossMult', game.healthLoss);
