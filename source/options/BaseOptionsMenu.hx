@@ -151,7 +151,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		if(nextAccept <= 0)
 		{
-			var usesCheckbox = true;
+			var usesCheckbox:Bool = true;
 			if(curOption.type != 'bool')
 			{
 				usesCheckbox = false;
