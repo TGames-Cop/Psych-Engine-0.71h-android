@@ -454,7 +454,7 @@ class ChartingState extends MusicBeatState
 
 		var loadAutosaveBtn:FlxButton = new FlxButton(reloadSongJson.x, reloadSongJson.y + 30, 'Load Autosave', function()
 		{
-			PlayState.SONG = _song.song;
+			//PlayState.SONG = ;
 			MusicBeatState.resetState();
 		});
 
