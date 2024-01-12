@@ -302,7 +302,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			option.minValue = 2;
 			option.maxValue = 10;
 			option.changeValue = 0.1;
-			addOption(option);
+			addOption(option);	
 		}
 		if (ClientPrefs.data.language == 'Mandarin') {
 			title = 'Gameplay Settings';

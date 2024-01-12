@@ -636,7 +636,7 @@ class TitleState extends MusicBeatState
 				case 3:
 					addMoreText(ClientPrefs.data.endingCorruprion, 0, FlxColor.RED);
 				case 4:
-					addMoreText("Android", 0, FlxColor.GREEN);
+					addMoreText("\nAndroid", 0, FlxColor.GREEN);
 				case 5:
 					deleteCoolText();
 				case 6:
