@@ -126,6 +126,9 @@ class MusicBeatState extends FlxUIState
 	public static var camBeat:FlxCamera;
 
 	override function create() {
+
+		FlxG.cameras.fade(FlxColor.BLACK, 1.5, true);
+
 		camBeat = FlxG.camera;
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		#if MODS_ALLOWED Mods.updatedOnState = false; #end
@@ -232,9 +235,13 @@ class MusicBeatState extends FlxUIState
 			return;
 		}
 
-		if(FlxTransitionableState.skipNextTransIn) FlxG.switchState(nextState);
-		else startTransition(nextState);
-		FlxTransitionableState.skipNextTransIn = false;
+		FlxG.cameras.fade(FlxColor.BLACK, 1.5, false, function() FlxG.switchState(nextState), true);
+	}
+
+	public static function nullswitchState(nextState:FlxState = null) {
+		if(nextState == null) nextState = FlxG.state;
+
+		FlxG.switchState(nextState);
 	}
 
 	public static function resetState() {
