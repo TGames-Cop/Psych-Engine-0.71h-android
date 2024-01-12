@@ -271,15 +271,15 @@ addOption(option);
 
     public function fpsNew() {
         
-        FlxTween.tween(Main.fpsVar, {x: Clientprefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
+        FlxTween.tween(Main.fpsVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
             ease: FlxEase.elasticIn,
             type: FlxTweenType.PERSIST
         });
-        FlxTween.tween(Main.memoryVar, {x: Clientprefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
+        FlxTween.tween(Main.memoryVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
             ease: FlxEase.elasticIn,
             type: FlxTweenType.PERSIST
         });
-        FlxTween.tween(Main.coinVar, {x: Clientprefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
+        FlxTween.tween(Main.coinVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
             ease: FlxEase.elasticIn,
             type: FlxTweenType.PERSIST
         });
