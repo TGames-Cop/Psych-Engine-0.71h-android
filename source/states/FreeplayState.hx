@@ -256,12 +256,14 @@ class FreeplayState extends MusicBeatState
 		leftArrow = new FlxSprite(0).loadGraphic(Paths.image('icons/Menu/leftArrow'));
 		leftArrow.screenCenter(Y);
 		leftArrow.antialiasing = ClientPrefs.data.antialiasing;
+		leftArrow.alpha = 0;
 		add(leftArrow);
 
 		rightArrow = new FlxSprite().loadGraphic(Paths.image('icons/Menu/rightArrow'));
 		rightArrow.screenCenter(Y);
 		rightArrow.antialiasing = ClientPrefs.data.antialiasing;
 		rightArrow.x = FlxG.width - rightArrow.width - 5;
+		rightArrow.alpha = 0;
 		add(rightArrow);
 
 		leftArrowButton = new FlxButton(leftArrow.x, 0, "", onLeft);
@@ -279,7 +281,7 @@ class FreeplayState extends MusicBeatState
 		FlxTween.tween(black, {alpha: 0}, 1);
 
 		#if android
-			addVirtualPad(FULL, A_B_C);
+			addVirtualPad(UP_DOWN, A_B_C);
 		#end
 		super.create();
 	}
@@ -342,20 +344,20 @@ class FreeplayState extends MusicBeatState
 				ease: FlxEase.circInOut,
 				type: BACKWARD
 			});
-			FlxTween.tween(rightArrow, {x: FlxG.width - rightArrow.width - 5 + 10}, 0.3, {
-				ease: FlxEase.circInOut,
-				type: BACKWARD
-			});
+		//	FlxTween.tween(rightArrow, {x: FlxG.width - rightArrow.width - 5 + 10}, 0.3, {
+		//		ease: FlxEase.circInOut,
+		//		type: BACKWARD
+		//	});
 		}
 		if (controls.UI_LEFT_P) {
 			FlxTween.tween(leftArrow, {alpha: 1}, 0.2, {
 				ease: FlxEase.circInOut,
 				type: BACKWARD
 			});
-			FlxTween.tween(leftArrow, {x: 0 + 10}, 0.3, {
-				ease: FlxEase.circInOut,
-				type: BACKWARD
-			});
+			//FlxTween.tween(leftArrow, {x: 0 + 10}, 0.3, {
+			//	ease: FlxEase.circInOut,
+			//	type: BACKWARD
+			//});
 
 			var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
 			holdTime += elapsed;

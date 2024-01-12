@@ -148,7 +148,7 @@ class TitleState extends MusicBeatState
 		#if android
 		var lang:String = '';
 		if (DeviceLanguage.getLang() == 'zh') 
-		lang = 'psych0.71h 安卓端口测试\nb站-北狐丶逐梦移植\n禁止上传到任何资源网站';
+		lang = '终结腐败 V2.0\n移植者 ThonnyDev - TGames | CamelyGamer';
 		else
 		lang = 'Ending Corruption V2.0\nPort by ThonnyDev - TGames | CamelyGamer';
 		AndroidDialogsExtend.OpenToast(lang, 1);
@@ -340,15 +340,15 @@ class TitleState extends MusicBeatState
 				if (ClientPrefs.data.music == 'TerminalMusic') FlxG.sound.playMusic(Paths.music('TerminalMusic'), 1.2);
 		}
 			if(Main.memoryVar != null && !ClientPrefs.data.noneAnimations) {
-				FlxTween.tween(Main.memoryVar, {x: 10}, 3);
+				FlxTween.tween(Main.memoryVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 3);
 				FlxTween.tween(Main.memoryVar, {alpha: 1}, 2.5);
 			}
 			if(Main.coinVar != null && !ClientPrefs.data.noneAnimations) {
-				FlxTween.tween(Main.coinVar, {x: 10}, 3);
+				FlxTween.tween(Main.coinVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 3);
 				FlxTween.tween(Main.coinVar, {alpha: 1}, 2.5);
 			}
 			if(Main.fpsVar != null && !ClientPrefs.data.noneAnimations) {
-				FlxTween.tween(Main.fpsVar, {x: 10}, 3);
+				FlxTween.tween(Main.fpsVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 3);
 				FlxTween.tween(Main.fpsVar, {alpha: 1}, 2.5);
 			}
 			Main.memoryVar.visible = ClientPrefs.data.showFPS;

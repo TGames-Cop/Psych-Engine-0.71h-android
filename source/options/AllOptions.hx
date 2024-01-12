@@ -70,6 +70,26 @@ class AllOptions extends BaseOptionsMenu {
             ['TerminalMusic', 'Hallucination', 'Disabled']);
             option.onChange = music;
             addOption(option);
+
+            var option:Option = new Option('FPS X',
+            'Set a specific X location of the information bar\nFPS/MEMORY/COINS',
+            'fpsX',
+            'bool');
+            option.minValue = 0;
+            option.maxValue = FlxG.width;
+            option.changeValue = 1;
+            option.onChange = fpsNew;
+            addOption(option);
+
+            var option:Option = new Option('FPS Y',
+            'Set a specific Y location of the information bar\nFPS/MEMORY/COINS',
+            'fpsY',
+            'bool');
+            option.minValue = 0;
+            option.maxValue = FlxG.height;
+            option.changeValue = 1;
+            option.onChange = fpsNew;
+            addOption(option);
         }
 
 
@@ -145,6 +165,26 @@ var option:Option = new Option('Music:',
 ['TerminalMusic', 'Hallucination', 'Disabled']);
 option.onChange = music;
 addOption(option);
+
+var option:Option = new Option('FPS X',
+'Establece una ubicación X específica de la barra de información\nFPS/MEMORIA/MONEDAS',
+'fpsX',
+'bool');
+option.minValue = 0;
+option.maxValue = FlxG.width;
+option.changeValue = 1;
+option.onChange = fpsNew;
+addOption(option);
+
+var option:Option = new Option('FPS Y',
+'Establece una ubicación Y específica de la barra de información\nFPS/MEMORIA/MONEDAS',
+'fpsY',
+'bool');
+option.minValue = 0;
+option.maxValue = FlxG.height;
+option.changeValue = 1;
+option.onChange = fpsNew;
+addOption(option);
         }
 
 
@@ -197,6 +237,26 @@ addOption(option);
     ['TerminalMusic', 'Hallucination', 'Disabled']);
     option.onChange = music;
     addOption(option);
+
+    var option:Option = new Option('FPS X',
+    'Defina um local X específico da barra de informações\nFPS/MEMORY/COINS',
+    'fpsX',
+    'bool');
+    option.minValue = 0;
+    option.maxValue = FlxG.width;
+    option.changeValue = 1;
+    option.onChange = fpsNew;
+    addOption(option);
+
+    var option:Option = new Option('FPS Y',
+    'Defina um local Y específico da barra de informações\nFPS/MEMORY/COINS',
+    'fpsY',
+    'bool');
+    option.minValue = 0;
+    option.maxValue = FlxG.height;
+    option.changeValue = 1;
+    option.onChange = fpsNew;
+    addOption(option);
         }
 
         super();
@@ -207,5 +267,21 @@ addOption(option);
 
         if (music != 'Disabled') FlxG.sound.playMusic(Paths.music(music));
         if (music == 'Disabled') FlxG.sound.playMusic(Paths.music('none'));
+    }
+
+    public function fpsNew() {
+        
+        FlxTween.tween(Main.fpsVar, {x: Clientprefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
+            ease: FlxEase.elasticIn,
+            type: FlxTweenType.PERSIST
+        });
+        FlxTween.tween(Main.memoryVar, {x: Clientprefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
+            ease: FlxEase.elasticIn,
+            type: FlxTweenType.PERSIST
+        });
+        FlxTween.tween(Main.coinVar, {x: Clientprefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5, {
+            ease: FlxEase.elasticIn,
+            type: FlxTweenType.PERSIST
+        });
     }
 }

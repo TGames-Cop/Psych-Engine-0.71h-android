@@ -410,7 +410,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		if(Main.fpsVar != null) {
 			//Main.fpsVar.visible = ClientPrefs.data.showFPS;
 			if (ClientPrefs.data.showFPS == true) {
-				FlxTween.tween(Main.fpsVar, {x: 10}, 0.5);	
+				FlxTween.tween(Main.fpsVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5);	
 			}
 
 			if (ClientPrefs.data.showFPS == false) {
@@ -420,7 +420,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		if(Main.memoryVar != null) {
 			//Main.memoryVar.visible = ClientPrefs.data.showFPS;
 			if (ClientPrefs.data.showFPS == true) {
-				FlxTween.tween(Main.memoryVar, {x: 10}, 0.5);	
+				FlxTween.tween(Main.memoryVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5);	
 			}
 
 			if (ClientPrefs.data.showFPS == false) {
@@ -429,7 +429,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		}
 		if (Main.coinVar != null) {
 			if (ClientPrefs.data.showFPS == true) {
-				FlxTween.tween(Main.coinVar, {x: 10}, 0.5);	
+				FlxTween.tween(Main.coinVar, {x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}, 0.5);	
 			}
 
 			if (ClientPrefs.data.showFPS == false) {

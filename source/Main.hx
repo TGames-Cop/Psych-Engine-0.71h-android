@@ -101,23 +101,24 @@ class Main extends Sprite
 		#end
 
 	
+		//{x: ClientPrefs.data.fpsX, y: ClientPrefs.data.fpsY}
 		if (ClientPrefs.data.noneAnimations) {
-			coinVar = new COINS(10, 3, 0xFFFFFF);
+			coinVar = new COINS(ClientPrefs.data.fpsX, ClientPrefs.data.fpsY, 0xFFFFFF);
 			addChild(coinVar);
-			memoryVar = new MEMORY(10, 3, 0xFFFFFF);
+			memoryVar = new MEMORY(ClientPrefs.data.fpsX, ClientPrefs.data.fpsY, 0xFFFFFF);
 			addChild(memoryVar);
-			fpsVar = new FPS(10, 3, 0xFFFFFF);
+			fpsVar = new FPS(ClientPrefs.data.fpsX, ClientPrefs.data.fpsY, 0xFFFFFF);
 			addChild(fpsVar);
 			Lib.current.stage.align = "tl";
 			Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 			} else {
-			coinVar = new COINS(-60, 3, 0xFFFFFF);
+			coinVar = new COINS(-60, ClientPrefs.data.fpsY, 0xFFFFFF);
 			coinVar.alpha = 0;
 			addChild(coinVar);
-			memoryVar = new MEMORY(-60, 3, 0xFFFFFF);
+			memoryVar = new MEMORY(-60, ClientPrefs.data.fpsY, 0xFFFFFF);
 			memoryVar.alpha = 0;
 			addChild(memoryVar);
-			fpsVar = new FPS(-60, 3, 0xFFFFFF);
+			fpsVar = new FPS(-60, ClientPrefs.data.fpsY, 0xFFFFFF);
 			fpsVar.alpha = 0;
 			addChild(fpsVar);
 			Lib.current.stage.align = "tl";

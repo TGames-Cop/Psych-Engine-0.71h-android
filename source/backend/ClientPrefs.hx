@@ -95,6 +95,10 @@ class SaveVariables {
 	public var nonePlugins:Bool = false;
 	public var updateSettings:Bool = false;
 
+	//Android - Display
+	public var fpsX:Int = 10;
+	public var fpsY:Int = 3;
+
 	//Others
 	public var coins:Int = 0;
 
