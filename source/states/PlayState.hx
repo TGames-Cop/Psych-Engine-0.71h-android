@@ -2461,7 +2461,7 @@ class PlayState extends MusicBeatState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
-		if (FlxG.keys.justPressed.SHIFT && boyfriend.animOffsets.exists('hey') || MusicBeatState.androidc.vpad.buttonG && boyfriend.animOffsets.exists('hey')) {
+		if (FlxG.keys.justPressed.SHIFT && boyfriend.animOffsets.exists('hey') || MusicBeatState.androidc.vpad.buttonG.justPressed && boyfriend.animOffsets.exists('hey')) {
 			boyfriend.playAnim('hey');
 			boyfriend.specialAnim = true;
 
