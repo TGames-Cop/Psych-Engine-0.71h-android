@@ -467,7 +467,11 @@ class TitleState extends MusicBeatState
 		}
 
 		#if android
-			AndroidDialogsExtend.OpenToast("No pudimos comprobar si tienes pantallas curvas\nSe activaran las opciones de Ajuste por Emergencia", 7);
+			if (ClientPrefs.data.language == 'Spanish') AndroidDialogsExtend.OpenToast("No pudimos comprobar si tienes pantallas curvas\nSe activaran las opciones de Ajuste por Emergencia", 7);
+
+			if (ClientPrefs.data.language == 'Inglish') AndroidDialogsExtend.OpenToast("We couldn't check if you have curved screens\nEmergency Adjustment options are activated", 7);
+
+			if (ClientPrefs.data.language == 'Portuguese') AndroidDialogsExtend.OpenToast("Não foi possível verificar se você tem telas curvas\nAs opções de ajuste de emergência estão ativadas", 7);
 		#end
 
 		// credGroup.add(credTextShit);

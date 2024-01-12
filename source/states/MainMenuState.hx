@@ -369,7 +369,11 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	#if android
-	AndroidDialogsExtend.OpenToast("!Error!\nTu Dispositivo no es compatible con los servicios\nde Internet", 5);
+	if (ClientPrefs.data.language == 'Spanish') AndroidDialogsExtend.OpenToast("!Error!\nTu Dispositivo no es compatible con los servicios\nde Internet", 5);
+
+	if (ClientPrefs.data.language == 'Inglish') AndroidDialogsExtend.OpenToast("!Error!\nYour Device is not compatible with Internet services", 5);
+
+	if (ClientPrefs.data.language == 'Portuguese') AndroidDialogsExtend.OpenToast("!Error!\nSeu dispositivo não é compatível com serviços de Internet", 5);
 	#end
 
 		super.create();
@@ -478,7 +482,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 
-			if (controls.BACK)
+			if (controls.BACK || FlxG.android.justReleased.BACK)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.RED : 0x4CFF0000, 1);

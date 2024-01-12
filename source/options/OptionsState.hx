@@ -258,7 +258,7 @@ class OptionsState extends MusicBeatState
 			reloadButton.alpha = 1;
 		}
 
-		if (controls.BACK || FlxG.android.justPressed.BACK) {
+		if (controls.BACK || FlxG.android.justReleased.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.sound.music.fadeOut(2, 0);
 			//FlxTween.tween(grpOptions, {alpha: 0}, 5);

@@ -112,11 +112,17 @@ class AndroidControlsMenu extends MusicBeatState
 		shiftPozition.borderSize = 2;
 		add(shiftPozition);
 
-		var tipText:FlxText = new FlxText(10, FlxG.height - 24, 0, 'Press BACK to Go Back to Options Menu', 16);
+		var tipText:FlxText = new FlxText(10, FlxG.height - 24, 0, '', 16);
 		tipText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		tipText.borderSize = 2;
 		tipText.scrollFactor.set();
 		add(tipText);
+
+		if (ClientPrefs.data.language == 'Inglish') tipText.text = 'Press BACK to Go Back to Options Menu';
+
+		if (ClientPrefs.data.language == 'Spanish') tipText.text = 'Presione ATRÁS para regresar al menú de opciones';
+
+		if (ClientPrefs.data.language == 'Portuguese') tipText.text = 'Pressione VOLTAR para voltar ao menu de opções';
 
 		changeSelection(0);
 	}

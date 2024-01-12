@@ -404,7 +404,7 @@ class NoteOffsetState extends MusicBeatState
 			updateMode();
 		}
 
-		if(controls.BACK)
+		if(controls.BACK || FlxG.android.justReleased.BACK)
 		{
 			if(zoomTween != null) zoomTween.cancel();
 			if(beatTween != null) beatTween.cancel();

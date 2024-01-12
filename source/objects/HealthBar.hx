@@ -1,7 +1,11 @@
 package objects;
 
+import flixel.effects.FlxFlicker;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
+
+import flixel.tweens.misc.ColorTween;
+import flixel.tweens.FlxTween;
 
 class HealthBar extends FlxSpriteGroup
 {
@@ -19,15 +23,16 @@ class HealthBar extends FlxSpriteGroup
 	public var barHeight(default, set):Int = 1;
 	public var barOffset:FlxPoint = new FlxPoint(3, 3);
 
-	public function new(x:Float, y:Float, image:String = 'healthBar', valueFunction:Void->Float = null, boundX:Float = 0, boundY:Float = 1, ?angle:Int)
+	public function new(x:Float, y:Float, image:String = 'healthBar', valueFunction:Void->Float = null, boundX:Float = 0, boundY:Float = 1, ?angle:Float)
 	{
 		super(x, y);
 		
 		if(valueFunction != null) this.valueFunction = valueFunction;
 		setBounds(boundX, boundY);
 		
-		bg = new FlxSprite().loadGraphic(Paths.image(image));
+		bg = new FlxSprite(x, y).loadGraphic(Paths.image(image));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
+		//bg.screenCenter(Y);
 		barWidth = Std.int(bg.width - 6);
 		barHeight = Std.int(bg.height - 6);
 
@@ -53,6 +58,12 @@ class HealthBar extends FlxSpriteGroup
 		var value:Null<Float> = FlxMath.remapToRange(FlxMath.bound(valueFunction(), bounds.min, bounds.max), bounds.min, bounds.max, 0, 100);
 		percent = (value != null ? value : 0);
 		super.update(elapsed);
+
+		if (percent > 65 && leftBar.color == FlxColor.GREEN || percent > 65 && leftBar.color == FlxColor.GRAY) FlxTween.color(leftBar, 1, FlxColor.GREEN, FlxColor.RED);
+		if (percent < 65 && leftBar.color == FlxColor.RED || percent < 65 && leftBar.color == FlxColor.GRAY) FlxTween.color(leftBar, 1, FlxColor.RED, FlxColor.GREEN);
+
+		if (percent > 35 && rightBar.color == FlxColor.RED || percent > 35 && rightBar.color == FlxColor.GRAY) FlxTween.color(rightBar, 1, FlxColor.RED, FlxColor.PURPLE);
+		if (percent < 35 && rightBar.color == FlxColor.PURPLE || percent < 35 && rightBar.color == FlxColor.GRAY) FlxTween.color(rightBar, 1, FlxColor.PURPLE, FlxColor.RED);
 	}
 	
 	public function setBounds(min:Float, max:Float)
@@ -63,16 +74,16 @@ class HealthBar extends FlxSpriteGroup
 
 	public function setColors(left:FlxColor, right:FlxColor)
 	{
-		leftBar.color = left;
-		rightBar.color = right;
+		FlxTween.color(leftBar, 1, FlxColor.BLACK, FlxColor.GRAY);
+		FlxTween.color(rightBar, 1, FlxColor.BLACK, FlxColor.GRAY);
 	}
 
 	public function updateBar()
 	{
 		if(leftBar == null || rightBar == null) return;
-
-		leftBar.setPosition(bg.x, bg.y);
-		rightBar.setPosition(bg.x, bg.y);
+		
+		FlxTween.tween(leftBar, {x: bg.x, y: bg.y}, 1);
+		FlxTween.tween(rightBar, {x: bg.x, y: bg.y}, 1);
 
 		var leftSize:Float = 0;
 		if(leftToRight) leftSize = FlxMath.lerp(0, barWidth, percent / 100);

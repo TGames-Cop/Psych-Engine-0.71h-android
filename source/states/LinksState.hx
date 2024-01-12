@@ -195,7 +195,7 @@ class LinksState extends MusicBeatState
 				},
 				null, ignoreWarnings));
 			}
-			if (controls.BACK)
+			if (controls.BACK || FlxG.android.justReleased.BACK)
 			{
 				if(colorTween != null) {
 					colorTween.cancel();

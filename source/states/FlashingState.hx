@@ -74,6 +74,16 @@ class FlashingState extends MusicBeatState
 					});
 				}
 			}
+			if (FlxG.android.justReleased.BACK) {
+				ClientPrefs.data.flashing = false;
+				ClientPrefs.saveSettings();
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				FlxTween.tween(warnText, {alpha: 0}, 1, {
+					onComplete: function (twn:FlxTween) {
+						MusicBeatState.switchState(new TitleState());
+					}
+				});
+			}
 		}
 		super.update(elapsed);
 	}

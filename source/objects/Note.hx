@@ -10,6 +10,8 @@ import objects.StrumNote;
 
 import flixel.math.FlxRect;
 
+using StringTools;
+
 typedef EventNote = {
 	strumTime:Float,
 	event:String,
@@ -60,6 +62,7 @@ class Note extends FlxSprite
 	public var eventLength:Int = 0;
 	public var eventVal1:String = '';
 	public var eventVal2:String = '';
+	public var eventVal3:String = '';
 
 	public var rgbShader:RGBShaderReference;
 	public static var globalRgbShaders:Array<RGBPalette> = [];
@@ -70,6 +73,8 @@ class Note extends FlxSprite
 	public var earlyHitMult:Float = 1;
 	public var lateHitMult:Float = 1;
 	public var lowPriority:Bool = false;
+
+	public var velocityadd:Bool = false;
 
 	public static var SUSTAIN_SIZE:Int = 44;
 	public static var swagWidth:Float = 160 * 0.7;
@@ -87,6 +92,7 @@ class Note extends FlxSprite
 		b: -1,
 		a: ClientPrefs.data.splashAlpha
 	};
+
 	public var offsetX:Float = 0;
 	public var offsetY:Float = 0;
 	public var offsetAngle:Float = 0;
@@ -98,7 +104,7 @@ class Note extends FlxSprite
 	public var copyAngle:Bool = true;
 	public var copyAlpha:Bool = true;
 
-	public var hitHealth:Float = 0.023;
+	public var hitHealth:Float = 1;
 	public var missHealth:Float = 0.0475;
 	public var rating:String = 'unknown';
 	public var ratingMod:Float = 0; //9 = unknown, 0.25 = shit, 0.5 = bad, 0.75 = good, 1 = sick
@@ -157,6 +163,28 @@ class Note extends FlxSprite
 
 		if(noteData > -1 && noteType != value) {
 			switch(value) {
+				case 'nota de peligro':
+					reloadNote('OthersNotes/Nota-de-alerta');
+
+					hitsound = 'notes-sound/sonido-de-disparo';
+
+					hitCausesMiss = true;
+				
+				case 'Attack Note':
+					reloadNote('OtehersNotes/AttackNote');
+
+					hitCausesMiss = true;
+
+				case 'Speed Note':
+					velocityadd = true;
+				
+				case 'Glitch Note':
+					reloadNote('GlitchNote_assets');
+
+					hitsound = 'note-sound/glitch';
+
+					hitCausesMiss = true;
+					
 				case 'Hurt Note':
 					ignoreNote = mustPress;
 					//reloadNote('HURTNOTE_assets');
@@ -174,11 +202,11 @@ class Note extends FlxSprite
 					noteSplashData.texture = 'noteSplashes/noteSplashes-electric';
 
 					// gameplay data
-					lowPriority = true;
-					missHealth = isSustainNote ? 0.25 : 0.1;
-					hitCausesMiss = true;
-					hitsound = 'cancelMenu';
-					hitsoundChartEditor = false;
+					lowPriority = false;
+					missHealth = isSustainNote ? 0.75 : 0.1;
+					hitCausesMiss = false;
+					hitsound = 'FireSound';
+					hitsoundChartEditor = true;
 				case 'Alt Animation':
 					animSuffix = '-alt';
 				case 'No Animation':
@@ -220,8 +248,8 @@ class Note extends FlxSprite
 		if(noteData > -1) {
 			texture = '';
 			rgbShader = new RGBShaderReference(this, initializeGlobalRGBShader(noteData));
-			if(PlayState.SONG != null && (PlayState.SONG.disableNoteRGB || ClientPrefs.data.disableNoteRGB)) rgbShader.enabled = false;
-            
+			if(PlayState.SONG != null && PlayState.SONG.disableNoteRGB) rgbShader.enabled = false;
+
 			x += swagWidth * (noteData);
 			if(!isSustainNote && noteData < colArray.length) { //Doing this 'if' check to fix the warnings on Senpai songs
 				var animToPlay:String = '';
@@ -274,7 +302,7 @@ class Note extends FlxSprite
 				scale.y *= PlayState.daPixelZoom;
 				updateHitbox();
 			}
-			earlyHitMult = 0.5;
+			earlyHitMult = 0;
 		}
 		else if(!isSustainNote)
 		{
@@ -315,10 +343,7 @@ class Note extends FlxSprite
 			skin = PlayState.SONG != null ? PlayState.SONG.arrowSkin : null;
 			if(skin == null || skin.length < 1)
 				skin = defaultNoteSkin + postfix;
-			if (Paths.fileExists('images/NOTE_assets.png', IMAGE) && ClientPrefs.data.noteSkin == ClientPrefs.defaultData.noteSkin) //fix for load old mods note assets
-		        skin = 'NOTE_assets'; 	
 		}
-		
 
 		var animName:String = null;
 		if(animation.curAnim != null) {
@@ -336,7 +361,6 @@ class Note extends FlxSprite
 			_lastValidChecked = customSkin;
 		}
 		else skinPostfix = '';
-		
 
 		if(PlayState.isPixelStage) {
 			if(isSustainNote) {
@@ -386,9 +410,9 @@ class Note extends FlxSprite
 	function loadNoteAnims() {
 		if (isSustainNote)
 		{
-			animation.addByPrefix('purpleholdend', 'pruple end hold', 24, true); // this fixes some retarded typo from the original note .FLA
-			animation.addByPrefix(colArray[noteData] + 'holdend', colArray[noteData] + ' hold end', 24, true);
-			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece', 24, true);
+			animation.addByPrefix('purpleholdend', 'pruple end hold', ClientPrefs.data.SpritesFPS, true); // this fixes some retarded typo from the original note .FLA
+			animation.addByPrefix(colArray[noteData] + 'holdend', colArray[noteData] + ' hold end', ClientPrefs.data.SpritesFPS, true);
+			animation.addByPrefix(colArray[noteData] + 'hold', colArray[noteData] + ' hold piece', ClientPrefs.data.SpritesFPS, true);
 		}
 		else animation.addByPrefix(colArray[noteData] + 'Scroll', colArray[noteData] + '0');
 
@@ -399,30 +423,34 @@ class Note extends FlxSprite
 	function loadPixelNoteAnims() {
 		if(isSustainNote)
 		{
-			animation.add(colArray[noteData] + 'holdend', [noteData + 4], 24, true);
-			animation.add(colArray[noteData] + 'hold', [noteData], 24, true);
-		} else animation.add(colArray[noteData] + 'Scroll', [noteData + 4], 24, true);
+			animation.add(colArray[noteData] + 'holdend', [noteData + 4], ClientPrefs.data.SpritesFPS, true);
+			animation.add(colArray[noteData] + 'hold', [noteData], ClientPrefs.data.SpritesFPS, true);
+		} else animation.add(colArray[noteData] + 'Scroll', [noteData + 4], ClientPrefs.data.SpritesFPS, true);
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
 		if (mustPress)
 		{
 			canBeHit = (strumTime > Conductor.songPosition - (Conductor.safeZoneOffset * lateHitMult) &&
 						strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult));
+
 			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset && !wasGoodHit)
 				tooLate = true;
 		}
 		else
 		{
 			canBeHit = false;
+
 			if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * earlyHitMult))
 			{
 				if((isSustainNote && prevNote.wasGoodHit) || strumTime <= Conductor.songPosition)
 					wasGoodHit = true;
 			}
 		}
+
 		if (tooLate && !inEditor)
 		{
 			if (alpha > 0.3)
@@ -475,7 +503,7 @@ class Note extends FlxSprite
 	{
 		var center:Float = myStrum.y + offsetY + Note.swagWidth / 2;
 		if(isSustainNote && (mustPress || !ignoreNote) &&
-			(!mustPress || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit))))        
+			(!mustPress || (wasGoodHit || (prevNote.wasGoodHit && !canBeHit))))
 		{
 			var swagRect:FlxRect = clipRect;
 			if(swagRect == null) swagRect = new FlxRect(0, 0, frameWidth, frameHeight);

@@ -136,7 +136,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK || FlxG.android.justPressed.BACK) {
+		if (controls.BACK || FlxG.android.justReleased.BACK) {
 			#if android
 			//FlxTransitionableState.skipNextTransOut = true;
 			FlxG.resetState();

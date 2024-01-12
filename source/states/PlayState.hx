@@ -1649,7 +1649,7 @@ class PlayState extends MusicBeatState
 				TxtScore = 'Score: ' + songScore
 				+ '\n | Misses: ' + songMisses
 				+ ' | Rating: ' + str
-				+ '\nVelicity: x' + songSpeed;
+				+ '\nVelocity: x' + songSpeed;
 			}
 			if (ClientPrefs.data.language == 'Portuguese') {
 				TxtScore = 'Pontuação: ' + songScore
@@ -2240,12 +2240,10 @@ class PlayState extends MusicBeatState
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
 
-		if (controls.PAUSE #if android || FlxG.android.justPressed.BACK #end && startedCountdown && canPause)
+		if (controls.PAUSE && startedCountdown && canPause || FlxG.android.justReleased.BACK && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
-			if(ret != FunkinLua.Function_Stop) {
 				openPauseMenu();
-			}
 		}
 
 		if (controls.justPressed('debug_1') && !endingSong && !inCutscene) {
@@ -2463,7 +2461,7 @@ class PlayState extends MusicBeatState
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
-		if (FlxG.keys.justPressed.SHIFT && boyfriend.animOffsets.exists('hey')) {
+		if (FlxG.keys.justPressed.SHIFT && boyfriend.animOffsets.exists('hey') || MusicBeatState._virtualpad.buttonG.justPressed && boyfriend.animOffsets.exists('hey')) {
 			boyfriend.playAnim('hey');
 			boyfriend.specialAnim = true;
 
@@ -2475,18 +2473,18 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.CONTROL) {
 			if (cpuControlled == false) {
 				mode = true;
-				add(new Notification('Cpu Controller:', "El BotPlay se Activo", 1, camVIP, 1));
+				add(new Notification('Cpu Controller:', "El BotPlay se Activo\nEN ANDROID?", 1, camVIP, 1));
 			}
 
 			if (cpuControlled == true) {
 				mode = false;
-				add(new Notification('Cpu Controller:', "El BotPlay se Desactivo", 1, camVIP, 1));
+				add(new Notification('Cpu Controller:', "El BotPlay se Desactivo\nEXTRANO ESTO PASA SOLO EN PC", 1, camVIP, 1));
 			}
 
 			cpuControlled = mode;
 		}
 		if (ClientPrefs.data.dodge == true) {
-		if (FlxG.keys.justPressed.SPACE) {
+		if (FlxG.keys.justPressed.SPACE || MusicBeatState._virtualpad.buttonF.justPressed) {
 			if (boyfriend.animOffsets.exists('dodge')) boyfriend.playAnim('dodge');
 			if (boyfriend.animOffsets.exists('dodge')) boyfriend.specialAnim = true;
 			doge = true;
@@ -3143,7 +3141,7 @@ class PlayState extends MusicBeatState
 
 		if (stageUI == "pixel") stageUI = "normal";
 
-		FlxGameJolt.addScore(SONG.song, songScore, 877566, true, ClientPrefs.data.username);
+		//FlxGameJolt.addScore(SONG.song, songScore, 877566, true, ClientPrefs.data.username);
 
 		//ADD COINS
 		if (status1 == false && SONG.mision1 && Highscore.getScore(SONG.song, curDifficulty) == 0) {
@@ -3296,7 +3294,6 @@ class PlayState extends MusicBeatState
 		return true;
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
 	var achievementObj:AchievementPopup = null;
 	var notifi:Notification = null;
 	function startAchievement() {
@@ -3310,6 +3307,9 @@ class PlayState extends MusicBeatState
 			if (failNoti != '') {
 				add(new Notification('Misiones Fallidas', failNoti, 2, camVIP, 1.5));
 			}
+			if (failNoti == '') {
+				add(new Notification('Misiones Fallidas', '>Completaste Todas las Misiones Con Exito!!', 2, camVIP, 1.5));
+			}
 
 			statusGame = false;
 
@@ -3319,7 +3319,6 @@ class PlayState extends MusicBeatState
 				}
 			});
 	}
-	#end
 
 	public function KillNotes() {
 		while(notes.length > 0) {
@@ -3895,8 +3894,8 @@ class PlayState extends MusicBeatState
 
 		moveCameraSection();
 
-			if (health >= note.hitHealth * healthLoss + note.hitHealth * healthLoss) {
-			health -= note.hitHealth * healthLoss;
+			if (health >= 6) {
+			health -= 5;
 		}
 
 		if (SONG.needsVoices)
@@ -3973,7 +3972,7 @@ class PlayState extends MusicBeatState
 			}
 
 			moveCameraSection();
-			health += note.hitHealth * healthGain + 0.5;
+			health += 5 * healthGain + FlxG.random.int(1, 5);
 
 			if(!note.noAnimation) {
 				var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];

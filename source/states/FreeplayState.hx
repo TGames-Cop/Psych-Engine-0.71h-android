@@ -409,7 +409,7 @@ class FreeplayState extends MusicBeatState
 			holdTime = 0;
 		}
 
-		if (controls.BACK || FlxG.mouse.justPressedRight || FlxG.android.justPressed.BACK)
+		if (controls.BACK || FlxG.mouse.justPressedRight || FlxG.android.justReleased.BACK)
 		{
 			persistentUpdate = false;
 			if(colorTween != null) {

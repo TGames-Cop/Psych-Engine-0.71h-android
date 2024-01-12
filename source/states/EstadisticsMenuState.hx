@@ -52,7 +52,7 @@ class EstadisticsMenuState extends MusicBeatState {
     override function update(elapsed:Float) {
         var back:Bool = controls.BACK;
 
-        if (back || FlxG.android.justPressed.BACK) {
+        if (back || FlxG.android.justReleased.BACK) {
             FlxG.sound.play(Paths.sound('confirmMenu'));
             MusicBeatState.switchState(new MainMenuState());
         }
