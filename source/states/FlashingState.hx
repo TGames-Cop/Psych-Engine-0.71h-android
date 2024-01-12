@@ -20,9 +20,9 @@ class FlashingState extends MusicBeatState
 
 		#if android
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey, watch out!\n
-			Be careful when you touch the phone fast!\n
-			You can break your phone screen if you do that,also\n
+			"The Touch screen can be damaged by quick and strong touches!\n
+			It is recommended not to press the Touch Screen too hard!\n
+			Avoid Breaking the Screen\n
 			This Mod contains some flashing lights!\n
 			Press A to disable them now or go to Options Menu.\n
 			Press B to ignore this message.\n

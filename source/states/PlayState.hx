@@ -268,6 +268,16 @@ class PlayState extends MusicBeatState
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
+	//ThonnyDev - TGames | CamelyGamer
+
+	//Estadistics
+	public static var hitnotesong:Float;
+	public static var missNotesong:Float;
+	public static var deaths:Float;
+	public static var scoresTotal:Float;
+	public static var heyanim:Float;
+	public static var pointsWin:Int;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);

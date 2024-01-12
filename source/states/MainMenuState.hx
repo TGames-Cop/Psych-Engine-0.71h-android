@@ -135,29 +135,16 @@ class MainMenuState extends MusicBeatState
 	public static var statusOptions:Bool = false;
 
 	public function onEffect(Timer:FlxTimer):Void {
-		if (!selectedSomethin) {
-			FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.01);
-			FlxTween.tween(videoButton, {y: settingButton.y + settingButton.height + videoButton.height + 5}, 0.01);
-		}
 		if (selectedSomethin != true && !ClientPrefs.data.noneAnimations) changeItem();
 		if (ClientPrefs.data.noneAnimations) OptiChangeItem();
 		FlxTween.tween(bgCG, {alpha: 0}, ClientPrefs.data.timetrans, {
 			onComplete: function (twn:FlxTween) {
-				if (!selectedSomethin) {
-					FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.01);
-					FlxTween.tween(videoButton, {y: settingButton.y + settingButton.height + videoButton.height + 5}, 0.01);
-				}
 				if (selectedSomethin != true && !ClientPrefs.data.noneAnimations) changeItem();
 				if (ClientPrefs.data.noneAnimations) OptiChangeItem();
 				FlxTween.tween(bgCG, {alpha: 1}, ClientPrefs.data.timetrans, {
 					onComplete: function (twn:FlxTween) {
 						if (selectedSomethin != true && !ClientPrefs.data.noneAnimations) changeItem();
 						if (ClientPrefs.data.noneAnimations) OptiChangeItem();
-
-						if (!selectedSomethin) {
-							FlxTween.tween(settingButton, {y: FlxG.height - FlxG.height + settingButton.height + 5}, 0.01);
-							FlxTween.tween(videoButton, {y: settingButton.y + settingButton.height + videoButton.height + 5}, 0.01);
-						}
 					}
 				});
 			}
@@ -287,22 +274,16 @@ class MainMenuState extends MusicBeatState
 		settingIcon.alpha = 1;
 		//add(settingIcon);
 
-		settingButton = new FlxButton(FlxG.width - 100, 0, "", onClickSetting);
+		settingButton = new FlxButton(0, FlxG.height - 150, "", onClickSetting);
 		settingButton.loadGraphicFromSprite(settingIcon);
+		settingButton.screenCenter(X);
 		settingButton.scrollFactor.set();
 
-		videoButton = new FlxButton(FlxG.width - 105, FlxG.height - 250, "", onClickVideo);
+		videoButton = new FlxButton(0, FlxG.height - 250, "", onClickVideo);
 		videoButton.loadGraphicFromSprite(videoIcon);
+		videoButton.screenCenter(X);
+		videoButton.visible = false;
 		videoButton.scrollFactor.set();
-
-		//if (outdate != true) {
-		//if (TitleState.UpdateEC == false) selectedSomethin = false;
-		//if (TitleState.UpdateEC == true) selectedSomethin = true;
-		//}
-
-		//if (outdate == true) {
-		//	selectedSomethin = false;
-		//}
 
 		var scale:Float = 1;
 
@@ -327,26 +308,7 @@ class MainMenuState extends MusicBeatState
 			FlxTween.tween(menuItem, {alpha: 0.5}, 0.2);
 		}
 
-		/*if (TitleState.pathVersionOnlineM == false) {
-			outdate = true;
-			selectedSomethin = false;
-			curSelected = 0;
-			changeItem();
-		}*/
-
 		selectedSomethin = false;
-
-		/*if (outdate != true) {
-		if (TitleState.pathVersionOnlineM == true) {
-			outdate = true;
-			openSubState(new states.ActAvailableState());
-		}*/
-
-	if (ClientPrefs.data.language == 'Spanish') add(new Notification('ID', "Tu Nombre de Usuario es: \n" + ClientPrefs.data.username, 1, camAchievement, 1));
-
-	if (ClientPrefs.data.language == 'Inglish') add(new Notification('ID', 'Your Username is: \n' + ClientPrefs.data.username, 1, camAchievement, 1.5));
-
-	if (ClientPrefs.data.language == 'Portuguese') add(new Notification('ID', 'Seu nome de usuário é: \n' + ClientPrefs.data.username, 1, camAchievement, 1.5));
 
 		versionEngine = new FlxText(-100, FlxG.height - 24, 0, "");
 		versionEngine.scrollFactor.set();
@@ -421,7 +383,7 @@ class MainMenuState extends MusicBeatState
 			FlxTween.tween(bgCG, {alpha: 0}, ClientPrefs.data.timetrans);
 			FlxTween.tween(versionEngine, {x: -500}, 1);
 			FlxTween.tween(versionShit, {x: -500}, 1);
-			FlxTween.tween(settingButton, {x: FlxG.width + 40}, 1);
+			FlxTween.tween(settingButton, {y: FlxG.height + 50}, 1);
 			FlxTween.tween(videoButton, {x: FlxG.width + 40}, 1);
 			menuItems.forEach(function(spr:FlxSprite)
 				{
@@ -437,8 +399,8 @@ class MainMenuState extends MusicBeatState
 	}
 
 	public function onClickVideo() {
-		FlxG.sound.play(Paths.sound('confirmMenu'));
-		CoolUtil.browserLoad(TitleState.releasevideolink);
+		//FlxG.sound.play(Paths.sound('confirmMenu'));
+		//CoolUtil.browserLoad(TitleState.releasevideolink);
 	}
 
 	function onGenerate(Timer:FlxTimer):Void {
@@ -516,7 +478,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 
-			if (controls.BACK || FlxG.android.justPressed.BACK)
+			if (controls.BACK)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.RED : 0x4CFF0000, 1);
@@ -552,7 +514,7 @@ class MainMenuState extends MusicBeatState
 					FlxTween.tween(bgCG, {alpha: 0}, 0.5);
 					FlxTween.tween(versionEngine, {alpha: 0}, 0.5);
 					FlxTween.tween(versionShit, {alpha: 0}, 0.5);
-					FlxTween.tween(settingButton, {x: FlxG.width + 40}, 0.5);
+					FlxTween.tween(settingButton, {y: FlxG.height + 50}, 0.5);
 					FlxTween.tween(videoButton, {x: FlxG.width + 40}, 0.5);
 }
 
@@ -620,15 +582,9 @@ class MainMenuState extends MusicBeatState
 											case 'freeplay':
 												MusicBeatState.switchState(new FreeplayState());
 											case 'statistics':
-												//MusicBeatState.switchState(new EstadisticsMenuState());
-												#if android
-												AndroidDialogsExtend.OpenToast("!Error!\nNOT FOUND STATE", 9);
-												#end
+												MusicBeatState.switchState(new EstadisticsMenuState());
 											case 'links':
-												#if android
-												AndroidDialogsExtend.OpenToast("!Error!\nNOT FOUND STATE", 9);
-												#end
-												//MusicBeatState.switchState(new LinksState());
+												MusicBeatState.switchState(new LinksState());
 										}
 									}});
 							});
